@@ -1,5 +1,6 @@
+'This macro deletes the subdirectories with the name of the selected cells from one folder to another.
+
 Sub del_dirs()
-'Updateby Extendoffice
     Dim objFSO As Object
     Set objFSO = CreateObject("Scripting.FileSystemObject")
 
