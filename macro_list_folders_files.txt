@@ -1,0 +1,43 @@
+'Macro para la lectura de todos los archivos de los subdirectorios de una carpeta
+
+Sub folder_path()
+
+    path = InputBox("Ingresa la ruta de la carpeta:")
+    Call list_folder_files(path)
+    
+End Sub
+
+
+Sub list_folder_files(path)
+    Dim FSO, dir, subdir, file As Object
+    Set FSO = CreateObject("Scripting.FileSystemObject")
+    
+    'Ajuste de ruta
+    If path = "" Then
+        Exit Sub
+    ElseIf Right(path, 1) <> "" Then
+        path = path & ""
+    End If
+    
+    On Error GoTo ErrHandler
+    Set dir = FSO.GetFolder(path)
+    
+    'Leer archivos del directorio raiz
+    For Each file In dir.Files
+        ActiveCell.Value = FSO.getbasename(file.Name)
+        ActiveCell.Offset(1, 0).Select
+    Next
+    
+    'Leer archivos de subcarpetas del directorio raiz
+    For Each subdir In dir.subfolders
+        list_folder_files (subdir)
+    Next
+
+    'Autoajuste de columna y salida de la macro
+    ActiveCell.EntireColumn.AutoFit
+    Exit Sub
+    
+ErrHandler:
+    ActiveCell.Value = "Ruta inexistente"
+    
+End Sub
