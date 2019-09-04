@@ -9,11 +9,13 @@ Sub copy_file()
     Dim xSFldDlg As FileDialog, xDFldDlg As FileDialog
     Dim xSFileStr As Variant, xDPathStr As Variant
     Dim xVal As String
+    
     On Error Resume Next
     
     Set xSFldDlg = Application.FileDialog(msoFileDialogFilePicker)
     xSFldDlg.Title = "Selecciona el archivo a copiar"
     If xSFldDlg.Show <> -1 Then Exit Sub
+    
     xSFileStr = xSFldDlg.SelectedItems.Item(1)
     
     Set xRg = Application.InputBox("Selecciona los nombres de archivos:", , ActiveWindow.RangeSelection.Address, , , , , 8)
@@ -22,6 +24,7 @@ Sub copy_file()
     Set xDFldDlg = Application.FileDialog(msoFileDialogFolderPicker)
     xDFldDlg.Title = "Selecciona la carpeta de destino de los archivos:"
     If xDFldDlg.Show <> -1 Then Exit Sub
+    
     xDPathStr = xDFldDlg.SelectedItems.Item(1) & "\"
     
     For Each xCell In xRg
@@ -30,4 +33,5 @@ Sub copy_file()
             objFSO.copyFile xSFileStr, xDPathStr & xVal & ".pdf"
         End If
     Next
+    
 End Sub
