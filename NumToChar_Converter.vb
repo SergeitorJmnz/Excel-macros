@@ -32,14 +32,14 @@ Function NUM_TEXTO(Numero)
         Cadena = Cadena & " " & Trim(CadMiles) & " MIL"
     End If
     If Trim(CadMiles & CadCientos) = "UN" And Not Cientos = "000" Then
-        Cadena = Cadena & "UNO" '& " CON " & Decimales & "/100"
+        Cadena = Cadena & "UNO" 
     Else
         If Trim(CadCientos) = "" Then
-        Cadena = Cadena & " " & Trim(CadCientos) '& " CON " & Decimales & "/100"
+        Cadena = Cadena & " " & Trim(CadCientos) 
         Else
-        Cadena = Cadena & " " & Trim(CadCientos) '& " CON " & Decimales & "/100"
+        Cadena = Cadena & " " & Trim(CadCientos) 
         End If
-    End If
+    End If    
     If Trim(CadDecimales) > "" Then
         Cadena = Cadena & " CON " & Trim(CadDecimales)
     End If
